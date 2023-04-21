@@ -1,0 +1,127 @@
+# List of stages for jobs, and their order of execution
+stages:
+  - test
+  - package
+  - build
+  - deploy
+
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: "" # or "/certs" ??
+  # Gitlab CI recommend maven options
+  MAVEN_OPTS: >-
+    -Dhttps.protocols=TLSv1.2
+    -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
+    -Dorg.slf4j.simpleLogger.showDateTime=true    -Djava.awt.headless=true
+  MAVEN_CLI_OPTS: >-
+    --batch-mode
+    --errors
+    --fail-at-end
+    --show-version
+    --no-transfer-progress
+
+services:
+  - docker:20.10.16-dind
+
+#  cache folders to gain time on other runs of the pipeline
+cache:
+  paths:
+    - front/node_modules
+    - .m2/repository
+
+
+
+# test
+test-back: #name of the job
+  stage: test
+  image: maven:3.8.6-eclipse-temurin-17-alpine #name of the docker image we want to run and put ourselves in
+  tags:
+    - zenika-academy #to target group runner
+  script:
+    - echo "Running back tests..."
+    - cd back
+    - mvn clean test
+
+
+#package
+package-back :
+  stage: package
+  tags:
+    - zenika-academy
+  image: maven:3.8.6-eclipse-temurin-17-alpine
+  script:
+    - echo "Building back bundle..."
+    - cd back
+    - mvn $MAVEN_CLI_OPTS clean package -DskipTests
+  # output accessible for other jobs on pipeline
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/back/target
+
+
+
+package-front :
+  stage: package
+  tags:
+    - zenika-academy
+  image: node:lts-buster-slim
+  script:
+    - echo "Building front bundle.."
+    - cd front
+    - npm ci
+    - npm run build
+  # output accessible for other jobs on pipeline
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/front/dist
+
+
+
+
+#build
+build-back :
+  stage: build
+  tags:
+    - zenika-academy
+  dependencies:
+    - package-back
+  image: docker:20.10.16
+  script:
+    - echo "Building Docker image of back..."
+    - cd back
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker image build -t $CI_REGISTRY_IMAGE/back:latest .
+    - docker image push $CI_REGISTRY_IMAGE/back:latest
+
+
+build-front :
+  stage: build
+  tags:
+    - zenika-academy
+  image: docker:20.10.16
+  dependencies:
+    - package-front
+  script:
+    - echo "Building Docker image of front..."
+    - cd front
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker image build -t $CI_REGISTRY_IMAGE/front:latest .
+    - docker image push $CI_REGISTRY_IMAGE/front:latest
+
+
+#deploy
+deploy:
+  stage: deploy
+  tags:
+    - zenika-academy
+  dependencies:
+    - build-back
+    - build-front
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker compose pull
+    - docker compose up -d --force-recreate
+    # checking up everything is ok then shutting down ?
+    - apk add curl
+    - timeout 60s sh -c 'until curl --request GET --url http://docker:8080/health; do sleep 2; done'
+    - docker compose down -v
