@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+
+  gazouilleur-front:
+    image: 'registry.gitlab.com/zacademy-rennes-promo-06/projet-final-poei-anne-laure/front:latest'
+    depends_on:
+      - gazouilleur-back
+    ports:
+      - "80:80"
+
+  gazouilleur-back:
+    image: 'registry.gitlab.com/zacademy-rennes-promo-06/projet-final-poei-anne-laure/back:latest'
+    ports:
+      - 8080:8080
+    depends_on:
+      - gazouilleur-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://gazouilleur-db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+
+  gazouilleur-db:
+    image: 'postgres:15-alpine'
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}

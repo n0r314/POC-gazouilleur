@@ -1,0 +1,62 @@
+:host {
+  position: sticky;
+  top: 0;
+  background-color: var(--background);
+}
+
+header {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+
+  > * + * {
+    margin-left: var(--spacing);
+  }
+
+  .header-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    > * + * {
+      margin-left: var(--spacing);
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+    }
+
+    input {
+      height: 40px;
+      font-size: 18px;
+      font-family: inherit;
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    background-color: var(--card);
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 32px;
+    text-decoration: none;
+
+    a {
+      margin-left: 8px;
+      text-decoration: none;
+    }
+
+
+    button {
+      display: flex;
+      align-items: center;
+      background-color: transparent;
+      border: 0 none;
+      cursor: pointer;
+      margin-left: 16px;
+    }
+  }
+}

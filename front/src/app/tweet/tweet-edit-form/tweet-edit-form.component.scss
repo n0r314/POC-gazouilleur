@@ -1,0 +1,72 @@
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .message {
+    padding: 20px;
+    border-radius: 5px;
+    margin: 30px 0;
+    text-align: center;
+  }
+  .success {
+    background-color: var(--green);
+  }
+
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > * + * {
+      margin-top: var(--spacing);
+    }
+
+    .user {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      .secondary {
+        margin-top: 4px;
+        color: var(--secondary);
+      }
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      > * + * {
+        margin-top: var(--spacing);
+      }
+
+      .inputs {
+        display: flex;
+        align-items: center;
+        font-family: inherit;
+
+        textarea {
+          width: 100%;
+          font-family: inherit;
+          font-size: inherit;
+        }
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+
+  }
+
+
+
+
+
+
+}

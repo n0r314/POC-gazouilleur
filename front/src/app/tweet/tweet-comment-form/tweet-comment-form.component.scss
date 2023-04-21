@@ -1,0 +1,27 @@
+form {
+  display: flex;
+  flex-direction: column;
+  > * + * {
+    margin-top: var(--spacing);
+  }
+
+  .inputs {
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+
+    > * + * {
+      margin-left: var(--spacing);
+    }
+
+    textarea {
+      width: 100%;
+      font-family: inherit;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
