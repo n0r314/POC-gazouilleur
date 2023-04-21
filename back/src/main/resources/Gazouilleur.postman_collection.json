@@ -1,0 +1,546 @@
+{
+	"info": {
+		"_postman_id": "19f05861-833f-419f-a37c-c2ae18f8b028",
+		"name": "Gazouilleur",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "tous les utilisateurs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "un utilisateur",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/1cd7b53d-978f-4c53-8fcd-b1886d5264d2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"1cd7b53d-978f-4c53-8fcd-b1886d5264d2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "un utilisateur non présent dans la base",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/1cd7b53d-978f-4c53-8fcd-b1886d526411",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"1cd7b53d-978f-4c53-8fcd-b1886d526411"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sauver un utilisateur",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"moi\",\r\n    \"password\" : \"pouet\",\r\n    \"nickname\" : \"Jane Doe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier un utilisateur",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GoGoGadgetoGo",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nickname\": \"moi\",\r\n    \"avatar\": \"https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?w=740&t=st=1669798439~exp=1669799039~hmac=0376cef51574a08fb3094b52d0ae727ef5fedf5b48b5edc430af71b8a66d94d9\",\r\n    \"description\": \"c'est moi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/1cd7b53d-978f-4c53-8fcd-b1886d5264d2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"1cd7b53d-978f-4c53-8fcd-b1886d5264d2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un utilisateur",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/2db4965a-09bd-42ca-89c4-3d3af736b127",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"2db4965a-09bd-42ca-89c4-3d3af736b127"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gazouillis",
+			"item": [
+				{
+					"name": "tous les gazouillis",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gazouillis",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gazouillis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tous les gazouillis avec auteur",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gazouillis",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gazouillis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "un gazouilli",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gazouillis/f59a394f-2dee-4551-8734-4cd041acef01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gazouillis",
+								"f59a394f-2dee-4551-8734-4cd041acef01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "un gazouilli non présent dans la base",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gazouillis/f59a394f-2dee-4551-8734-4cd041acef00",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gazouillis",
+								"f59a394f-2dee-4551-8734-4cd041acef00"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tous les commentaires d'un gazouilli",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gazouillis/1620d068-7ca0-4d9f-a2bc-f71675500ea5/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gazouillis",
+								"1620d068-7ca0-4d9f-a2bc-f71675500ea5",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sauver un gazouilli",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\" : \"J'écris un super gazouilli\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/gazouillis",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gazouillis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "créer un commentaire",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "johndoe",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "motdepasse",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\" : \"J'écris un super commentaire\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/gazouillis/1620d068-7ca0-4d9f-a2bc-f71675500ea5/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gazouillis",
+								"1620d068-7ca0-4d9f-a2bc-f71675500ea5",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier un gazouilli",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "johndoe",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "motdepasse",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\" : \"Contenu modifié\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/gazouillis/c303c6b4-3bde-4d84-a2b6-edbbaf31bff2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gazouillis",
+								"c303c6b4-3bde-4d84-a2b6-edbbaf31bff2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un gazouilli",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gazouillis/2db4965a-09bd-42ca-89c4-3d3af736b127",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gazouillis",
+								"2db4965a-09bd-42ca-89c4-3d3af736b127"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un commentaire",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gazouillis/2db4965a-09bd-42ca-89c4-3d3af736b127",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gazouillis",
+								"2db4965a-09bd-42ca-89c4-3d3af736b127"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/auth/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"johndoe\",\r\n    \"password\": \"motdepasse\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"moi\",\r\n    \"password\" : \"pouet\",\r\n    \"nickname\" : \"Jane Doe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
